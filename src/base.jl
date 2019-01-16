@@ -37,7 +37,7 @@ const wrappers = (
   :(LinearAlgebra.UpperTriangular{<:Any,AT})      => (A,mut)->LinearAlgebra.UpperTriangular(mut(parent(A))),
   :(LinearAlgebra.UnitUpperTriangular{<:Any,AT})  => (A,mut)->LinearAlgebra.UnitUpperTriangular(mut(parent(A))),
   :(LinearAlgebra.Diagonal{<:Any,AT})             => (A,mut)->LinearAlgebra.Diagonal(mut(parent(A))),
-  :(Base.ReshapedArray{<:Any,<:Any,AT,<:Any})     => (A,mut)->Base.ReshapedArray(mut(parent(A)))
+  :(Base.ReshapedArray{<:Any,<:Any,AT,<:Any})     => (A,mut)->Base.reshape(mut(parent(A)), size(A))
 )
 
 for (W, ctor) in wrappers
